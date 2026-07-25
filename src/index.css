@@ -1,0 +1,402 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+/* ===========================
+   BRAND TOKENS
+   =========================== */
+:root {
+  --primary: #10b981; /* Emerald Green */
+  --primary-dark: #059669; /* Dark Emerald */
+  --primary-light: #34d399; /* Mint/Light Emerald */
+  --accent: #f59e0b; /* Gold/Amber */
+  --accent-dark: #d97706; /* Dark Gold/Amber */
+  --success: #10b981;
+  --danger: #f43f5e;
+  --warning: #f59e0b;
+
+  /* Default View: Dark Mode variables */
+  --bg-surface: #090d16;
+  --bg-card: #111827;
+  --bg-sidebar: #090d16;
+  --bg-navbar: rgba(9, 13, 22, 0.85);
+
+  --border-card: #1f2937;
+  --border-sidebar: #1f2937;
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  --text-sidebar: #9ca3af;
+  --text-sidebar-active: #ffffff;
+  --bg-sidebar-hover: rgba(255, 255, 255, 0.05);
+  --text-sidebar-hover: #f3f4f6;
+
+  --bg-table-header: rgba(255, 255, 255, 0.02);
+  --bg-table-hover: rgba(255, 255, 255, 0.04);
+
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-card-hover: 0 8px 32px rgba(16, 185, 129, 0.15);
+  --shadow-glow-primary: 0 0 24px rgba(16, 185, 129, 0.2);
+
+  --bg-badge-sent: rgba(244, 63, 94, 0.15);
+  --text-badge-sent: #fb7185;
+  --border-badge-sent: rgba(244, 63, 94, 0.25);
+
+  --bg-badge-received: rgba(16, 185, 129, 0.15);
+  --text-badge-received: #34d399;
+  --border-badge-received: rgba(16, 185, 129, 0.25);
+
+  /* Auth page animated background gradient (dark mode - very subtle) */
+  --gradient-start: rgba(9, 13, 22, 0.0);
+  --gradient-mid: rgba(16, 185, 129, 0.04);
+  --gradient-end: rgba(9, 13, 22, 0.0);
+
+  color-scheme: dark;
+}
+
+:root.light {
+  /* Light Mode variables */
+  --bg-surface: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-sidebar: #ffffff;
+  --bg-navbar: rgba(255, 255, 255, 0.9);
+
+  --border-card: #e2e8f0;
+  --border-sidebar: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  --text-sidebar: #64748b;
+  --text-sidebar-active: #ffffff;
+  --bg-sidebar-hover: #f1f5f9;
+  --text-sidebar-hover: #0f172a;
+
+  --bg-table-header: #f8fafc;
+  --bg-table-hover: #f1f5f9;
+
+  --shadow-card: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+  --shadow-card-hover: 0 8px 32px rgba(16, 185, 129, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-glow-primary: 0 0 24px rgba(16, 185, 129, 0.15);
+
+  --bg-badge-sent: #fff1f2;
+  --text-badge-sent: #e11d48;
+  --border-badge-sent: rgba(244, 63, 94, 0.15);
+
+  --bg-badge-received: #ecfdf5;
+  --text-badge-received: #047857;
+  --border-badge-received: rgba(16, 185, 129, 0.15);
+
+  /* Auth page animated background gradient (light mode - soft colors) */
+  --gradient-start: #f8fafc;
+  --gradient-mid: #e0f2fe;
+  --gradient-end: #dcfce7;
+
+  color-scheme: light;
+}
+
+/* ===========================
+   GLOBAL BASE
+   =========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+/* ===========================
+   CARD UTILITIES
+   =========================== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-hover:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   GRADIENT TEXT
+   =========================== */
+.gradient-text-primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-success {
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===========================
+   GLASS CARD
+   =========================== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.08);
+}
+
+/* ===========================
+   ICON BADGE VARIANTS
+   =========================== */
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.icon-badge-indigo  { background: rgba(16, 185, 129, 0.1); color: var(--primary); }
+.icon-badge-cyan    { background: rgba(6, 182, 212, 0.1); color: #06b6d4; }
+.icon-badge-emerald { background: rgba(16, 185, 129, 0.1); color: var(--primary); }
+.icon-badge-rose    { background: rgba(244, 63, 94, 0.1); color: #f43f5e; }
+.icon-badge-violet  { background: rgba(245, 158, 11, 0.1); color: var(--accent); }
+.icon-badge-amber   { background: rgba(217, 119, 6, 0.1); color: #d97706; }
+.icon-badge-orange  { background: rgba(234, 88, 12, 0.1); color: #ea580c; }
+
+/* ===========================
+   STAT CARD GRADIENT BORDERS
+   =========================== */
+.stat-card {
+  background: var(--bg-card);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 1.25rem 1.25rem 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+}
+
+.stat-card-indigo::before  { background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
+.stat-card-green::before   { background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
+.stat-card-rose::before    { background: linear-gradient(90deg, #f43f5e, #fb7185); }
+.stat-card-violet::before  { background: linear-gradient(90deg, var(--accent), #fbbf24); }
+
+/* ===========================
+   SIDEBAR ACTIVE GLOW
+   =========================== */
+.sidebar-active {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+}
+
+/* ===========================
+   SKELETON SHIMMER
+   =========================== */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background-color: #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+.skeleton-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+  animation: shimmer-move 1.4s infinite ease-in-out;
+}
+
+@keyframes shimmer-move {
+  100% { transform: translateX(100%); }
+}
+
+/* ===========================
+   TABLE ANIMATIONS
+   =========================== */
+.animate-highlight {
+  animation: highlightFlash 0.8s ease-out;
+}
+
+@keyframes highlightFlash {
+  0% {
+    background-color: #d1fae5;
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  50% {
+    background-color: #a7f3d0;
+    opacity: 1;
+  }
+  100% {
+    background-color: #ecfdf5;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   PULSE DOT
+   =========================== */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* ===========================
+   AUTH STYLES (unchanged)
+   =========================== */
+.auth-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22);
+  position: relative;
+  overflow: hidden;
+  width: 850px;
+  max-width: 100%;
+  min-height: 520px;
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all .6s ease-in-out;
+}
+
+.sign-in { left: 0; width: 50%; z-index: 2; }
+.sign-up  { left: 0; width: 50%; opacity: 0; z-index: 1; }
+
+.auth-container.active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  pointer-events: active;
+}
+
+.auth-container.active .sign-in {
+  transform: translateX(100%);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform .6s ease-in-out;
+  z-index: 100;
+}
+
+.auth-container.active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  background: linear-gradient(135deg, #6366f1, #06b6d4);
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform .6s ease-in-out;
+}
+
+.auth-container.active .overlay {
+  transform: translateX(50%);
+}
+
+.overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 60px;
+  text-align: center;
+  height: 100%;
+  width: 50%;
+}
+
+.overlay-panel.left  { transform: translateX(-20%); }
+.auth-container.active .overlay-panel.left { transform: translateX(0); }
+.overlay-panel.right { right: 0; }
+
+.ghost-btn {
+  border: 1px solid white;
+  background: transparent;
+  padding: 12px 40px;
+  border-radius: 30px;
+  margin-top: 20px;
+  color: white;
+}
+
+/* ===========================
+   SIDEBAR ITEM ADAPTIVE STYLE
+   =========================== */
+.sidebar-item-adaptive {
+  color: var(--text-sidebar) !important;
+  transition: all 0.2s ease;
+}
+.sidebar-item-adaptive:hover {
+  background-color: var(--bg-sidebar-hover) !important;
+  color: var(--text-sidebar-hover) !important;
+}
