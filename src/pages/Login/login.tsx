@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 type Errors = {
   email?: string;
@@ -47,8 +47,8 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "https://central-pay-nu.vercel.app/user/signin",
+      const response = await axiosInstance.post(
+        "/user/signin",
         {
           email: email.trim(),
           password,

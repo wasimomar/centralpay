@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://cnpm entral-pay-nu.vercel.app",
+  baseURL: "https://central-pay-nu.vercel.app",
 });
 
 axiosInstance.interceptors.request.use((config) => {

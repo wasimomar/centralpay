@@ -1,10 +1,10 @@
-import axios from "axios";
+import axiosInstance from "./axiosInstance";
 import type { RegisterRes } from "../interfaces";
 
 export default async function authRegister(name: string, email: string, password: string) {
   try {
-    const response = await axios.post<RegisterRes>(
-      "https://central-pay-nu.vercel.app/user/signup",
+    const response = await axiosInstance.post<RegisterRes>(
+      "/user/signup",
       { name, email, password }
     );
     return response.data;
@@ -14,15 +14,10 @@ export default async function authRegister(name: string, email: string, password
 }
 
 export const verifyUser = async (email: string, otp: string) => {
-  const response = await fetch("https://central-pay-nu.vercel.app/user/verify", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, otp }),
-  });
-
-  if (!response.ok) {
-    throw new Error("Verification failed");
+  try {
+    const response = await axiosInstance.post("/user/verify", { email, otp });
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || "Verification failed");
   }
-
-  return response.json();
 };
